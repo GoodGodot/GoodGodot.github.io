@@ -1,0 +1,7 @@
+http://goodgodot.github.io/about/index.html
+http://goodgodot.github.io/tags/index.html
+http://goodgodot.github.io/categories/index.html
+http://goodgodot.github.io/archives/index.html
+http://goodgodot.github.io/2026/07/21/hello-world/
+http://goodgodot.github.io/2026/07/23/hello/
+http://goodgodot.github.io/
