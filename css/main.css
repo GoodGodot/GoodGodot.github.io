@@ -1386,7 +1386,7 @@ pre code {
     transition: all 0.2s ease-in-out;
   }
   .links-of-author a::before {
-    background: #9eb628;
+    background: #fec990;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2821,28 +2821,202 @@ header.header {
     margin-bottom: 10px;
   }
 }
+/* =============================================
+   1. 背景轮播层样式（替代原body背景）
+   配合 body-end.njk 的轮播脚本使用
+   ============================================= */
+/* 页面body去掉默认背景 */
+body {
+  background-color: transparent !important;
+}
+/* 背景轮播底层容器：全屏固定、层级最低 */
+.bg-slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+/* 淡入淡出过渡时长，数值越大切换越慢 */
+  transition: opacity 1.2s ease-in-out;
+  opacity: 0;
+}
+/* 激活状态：完全显示 */
+.bg-slider.active {
+  opacity: 1;
+}
+/* 暗色模式：给背景叠加深色遮罩 */
+body.dark .bg-slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
+}
+/* =============================================
+   2. 侧边栏整体毛玻璃（一整块统一风格）
+   ============================================= */
+/* 外层所有容器全透明，只保留内层作为毛玻璃载体 */
+.sidebar,
+.sidebar-inner,
+.sidebar-panel,
+.sidebar-inner > div {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+/* 侧边栏整体作为唯一毛玻璃大面板 */
+.sidebar-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0;
+  padding: 20px 16px;
+  border-radius: 16px !important;
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  overflow: hidden;
+}
+/* 内部所有子模块去掉独立背景、圆角、阴影 */
+.site-meta,
+.sidebar-nav,
+.site-overview,
+.post-toc,
+.social-links,
+.tag-cloud,
+.links-of-blogroll,
+.nav-tabs,
+.sidebar-toggle {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  backdrop-filter: none !important;
+}
+/* =============================================
+   3. 侧边栏面板顺序调整
+   顺序：头像概览 → 站点标题栏 → 导航菜单 → 其他
+   ============================================= */
+.site-overview {
+  order: 1 !important;
+}
+.site-meta {
+  order: 2 !important;
+}
+.sidebar-nav,
+.menu {
+  order: 3 !important;
+}
+.social-links {
+  order: 4 !important;
+}
+.post-toc {
+  order: 5 !important;
+}
+/* =============================================
+   4. 侧边栏内部排版与细节优化
+   ============================================= */
+/* 修复顶部标题栏：去掉原黑底，改为统一浅色风格 */
+.sidebar .site-meta {
+  padding: 0 0 16px 0;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+  text-align: center;
+}
+/* 标题文字改为深色，适配浅底色 */
+.sidebar .site-meta .site-title,
+.sidebar .site-meta .site-subtitle {
+  color: #333 !important;
+  text-shadow: none !important;
+}
+/* 头像概览模块 */
+.site-overview {
+  padding-bottom: 16px;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+  text-align: center;
+}
+/* 导航菜单模块 */
+.sidebar-nav {
+  padding-bottom: 16px;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+}
+.sidebar-nav .menu-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+.sidebar-nav .menu-item:hover {
+  background: rgba(0,0,0,0.06) !important;
+}
+/* 目录/概览切换标签居中 */
+.nav-tabs {
+  margin-bottom: 12px !important;
+  justify-content: center;
+}
+/* =============================================
+   5. 主内容区透明化
+   ============================================= */
+.main-inner,
+.content-wrap,
+.container .main,
+.posts-expand,
+.posts-collapse {
+  background: transparent !important;
+}
+/* =============================================
+   6. 文章卡片：毛玻璃 + 阴影 + 悬浮上浮动效
+   ============================================= */
 .post-block {
-  margin: 24px 0;
-  padding: 32px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(144,147,153,0.15);
+  margin: 24px 0 !important;
+  padding: 32px !important;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
   transition: all 0.3s ease;
+  border: none !important;
 }
 .post-block:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
 }
+/* =============================================
+   7. 暗色模式完整适配
+   ============================================= */
+/* 侧边栏整体暗色毛玻璃 */
+body.dark .sidebar-inner {
+  background: rgba(30,30,30,0.8) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
+}
+/* 暗色内部分隔线 */
+body.dark .site-meta,
+body.dark .site-overview,
+body.dark .sidebar-nav {
+  border-bottom-color: rgba(255,255,255,0.1) !important;
+}
+/* 暗色文字适配 */
+body.dark .site-meta .site-title,
+body.dark .site-meta .site-subtitle,
+body.dark .sidebar-nav a,
+body.dark .menu-item a {
+  color: #c9c9c9 !important;
+}
+body.dark .sidebar-nav .menu-item:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
+/* 暗色文章卡片 */
 body.dark .post-block {
-  background: #1e1e1e;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  background: rgba(30,30,30,0.8) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
 }
 body.dark .post-block:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-}
-@media (prefers-color-scheme: dark) {
-  .post-block {
-    background: #1f1f1f;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
 }
