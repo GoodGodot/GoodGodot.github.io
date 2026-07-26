@@ -73,12 +73,74 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
   <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://goodgodot.github.io/archives/"}</script>
   <script src="/js/third-party/quicklink.js" defer></script>
+<!-- 鼠标跟随柔光 -->
+<div id="mouse-light"></div>
+<style>
+#mouse-light {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(160,200,255,0.22) 0%, transparent 70%);
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: left 0.06s ease-out, top 0.06s ease-out;
+}
+body.dark #mouse-light {
+  background: radial-gradient(circle, rgba(140,180,255,0.18) 0%, transparent 70%);
+}
 
+/* 点击水波纹样式 */
+.water-ripple {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+}
+</style>
+
+<script>
+// ===== 鼠标跟随柔光 =====
+const light = document.querySelector('#mouse-light');
+document.addEventListener('mousemove', (e) => {
+  light.style.left = e.clientX + 'px';
+  light.style.top = e.clientY + 'px';
+});
+
+// ===== 点击水波纹特效（淡蓝色） =====
+document.addEventListener('click', function (e) {
+  const ripple = document.createElement('div');
+  ripple.classList.add('water-ripple');
+
+  // 统一淡蓝色波纹
+  ripple.style.border = '2px solid rgba(160,200,255,0.6)';
+
+  ripple.style.left = e.clientX + 'px';
+  ripple.style.top = e.clientY + 'px';
+  ripple.style.width = '0px';
+  ripple.style.height = '0px';
+
+  document.body.appendChild(ripple);
+
+  ripple.animate([
+    { width: '0px', height: '0px', opacity: 0.8 },
+    { width: '180px', height: '180px', opacity: 0 }
+  ], {
+    duration: 750,
+    easing: 'ease-out'
+  });
+
+  setTimeout(() => ripple.remove(), 750);
+})
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-<link rel="alternate" href="/atom.xml" title="Luo的博客" type="application/atom+xml">
-<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style><link rel="alternate" href="/atom.xml" title="Luo的博客" type="application/atom+xml">
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
