@@ -1386,7 +1386,7 @@ pre code {
     transition: all 0.2s ease-in-out;
   }
   .links-of-author a::before {
-    background: #f496ed;
+    background: #ffcc70;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2571,6 +2571,19 @@ ul.breadcrumb li:last-child {
     color: #eee;
   }
 }
+.gt-header a,
+.gt-comments a,
+.gt-popup a {
+  border-bottom: 0;
+}
+.gt-container .gt-popup .gt-action.is--active::before {
+  top: 0.7em;
+}
+@media (prefers-color-scheme: dark) {
+  .gt-container .gt-header-textarea {
+    background-color: var(--card-bg-color) !important;
+  }
+}
 mark.search-keyword {
   background: transparent;
   border-bottom: 1px dashed #ff2a2a;
@@ -3031,4 +3044,25 @@ body.dark .header {
 body.dark .header .site-meta .site-title,
 body.dark .header .site-meta .site-subtitle {
   color: #eee !important;
+}
+/* Gitalk评论面板毛玻璃样式，适配你的博客 */
+.gt-container {
+  background: rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px !important;
+  padding: 20px !important;
+}
+.gt-container .gt-header-textarea,
+.gt-container .gt-comment-content {
+  background: rgba(255,255,255,0.25) !important;
+  border-radius: 10px !important;
+}
+/* 暗色模式适配 */
+body.dark .gt-container {
+  background: rgba(20,20,20,0.35) !important;
+}
+body.dark .gt-container .gt-header-textarea,
+body.dark .gt-container .gt-comment-content {
+  background: rgba(40,40,40,0.35) !important;
 }
