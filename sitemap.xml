@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://goodgodot.github.io/2026/07/23/hello/</loc>
+    
+    <lastmod>2026-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://goodgodot.github.io/about/index.html</loc>
     
     <lastmod>2026-10-10</lastmod>
@@ -32,15 +41,6 @@
     <loc>http://goodgodot.github.io/archives/index.html</loc>
     
     <lastmod>2026-07-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://goodgodot.github.io/2026/07/23/hello/</loc>
-    
-    <lastmod>2026-07-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
